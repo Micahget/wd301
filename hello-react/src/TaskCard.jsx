@@ -3,12 +3,16 @@ import './index.css'
 import './TaskCard.css'
 
   const TaskCard = (props) => {
-    // console.log(props)
+    
+    let status = "Due on:" + props.dueDate
+    if (props.completedAtDate) {
+      status = "Completed on: " + props.completedAtDate 
+    }
     return (
-      <div className="TaskItem">
-        <h2 className="text-xl font-bold text-red-600">{props.title}</h2>
-        <p>completed on: </p>
-        <p>Assignee: Miki G</p>
+      <div className="TaskItem border-2">
+        <h2 className="text-xl font-bold">{props.title}</h2>
+        <p>{status} </p>
+        <p>Assignee: {props.assigneeName}</p>
       </div>
     )
   }
