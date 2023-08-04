@@ -17,30 +17,26 @@ function App() {
       <div className="col-start-2 col-span-2 p-6 border-4 border-gray-300 m-4 rounded-md items-center justify-items-center w-70">
         <h1 className="text-center text-2xl font-bold m-1">Pending</h1>
         <TaskCard
-          status="pending"
           title="Build a web with static content"
-          dueDate="September 13, 2023"
+          date="September 13, 2023"
           assigneeName="Rohit"
         />
         <TaskCard
-          status="pending"
           title="Add blog"
-          dueDate="10th December 2023"
+          date="December 19, 2023"
           assigneeName="Micah"
         />
       </div>
       <div className="col-span-2 p-6 border-4 border-gray-300 m-4 rounded-md">
         <h1 className="text-center text-2xl font-bold">Done</h1>
         <TaskCard
-          status="completed"
           title="Design the mockup"
-          completedAtDate="10th June 2023"
+          date="June 24, 2023"
           assigneeName="Rahul"
         />
         <TaskCard
-          status="completed"
           title="Get approval from principal"
-          completedAtDate="10th July 2023"
+          date="July 10, 2023"
           assigneeName="Max"
         />
       </div>
