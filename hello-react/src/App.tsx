@@ -18,12 +18,14 @@ function App() {
         <h1 className="text-center text-2xl font-bold m-1">Pending</h1>
         <TaskCard
           title="Build a web with static content"
-          date="September 13, 2023"
+          dueDate="September 13, 2023"
+          completedAtDate= ""
           assigneeName="Rohit"
         />
         <TaskCard
           title="Add blog"
-          date="December 19, 2023"
+          dueDate="December 19, 2023"
+          completedAtDate = ""
           assigneeName="Micah"
         />
       </div>
@@ -31,12 +33,14 @@ function App() {
         <h1 className="text-center text-2xl font-bold">Done</h1>
         <TaskCard
           title="Design the mockup"
-          date="June 24, 2023"
+          completedAtDate="June 24, 2023"
+          dueDate=""
           assigneeName="Rahul"
         />
         <TaskCard
           title="Get approval from principal"
-          date="July 10, 2023"
+          completedAtDate="July 10, 2023"
+          dueDate=""
           assigneeName="Max"
         />
       </div>
