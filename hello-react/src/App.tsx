@@ -19,13 +19,11 @@ function App() {
         <TaskCard
           title="Build a web with static content"
           dueDate="September 13, 2023"
-          completedAtDate= ""
           assigneeName="Rohit"
         />
         <TaskCard
           title="Add blog"
           dueDate="December 19, 2023"
-          completedAtDate = ""
           assigneeName="Micah"
         />
       </div>
@@ -34,13 +32,11 @@ function App() {
         <TaskCard
           title="Design the mockup"
           completedAtDate="June 24, 2023"
-          dueDate=""
           assigneeName="Rahul"
         />
         <TaskCard
           title="Get approval from principal"
           completedAtDate="July 10, 2023"
-          dueDate=""
           assigneeName="Max"
         />
       </div>

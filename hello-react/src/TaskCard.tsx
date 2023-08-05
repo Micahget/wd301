@@ -5,16 +5,16 @@ import './TaskCard.css'
 
 interface TaskCardProps {
     title: string
-    dueDate: string
-    completedAtDate: string
+    dueDate?: string // here ? means optional this fix the error. It means that this prop is might not be passed
+    completedAtDate?: string
     assigneeName: string
   }
 
   const TaskCard = (props: TaskCardProps) => {
-    console.log("due", props.dueDate)
-    console.log("done", props.completedAtDate)
-    let status = "Due on:" + props.dueDate
+    let status = "Due on: " + props.dueDate
+    props.dueDate? console.log("due", props.dueDate): console.log("no due date")
     if (props.completedAtDate){ 
+      console.log("done", props.completedAtDate)
       status = "Completed on: " + props.completedAtDate 
     }
     
