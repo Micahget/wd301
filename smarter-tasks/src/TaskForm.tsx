@@ -14,6 +14,7 @@ class TaskForm extends React.Component<TaskFormProps, TaskFormState> {
     return (
       <form>
         <input type="text" />
+        <button type="submit">Add Task</button>
       </form>
     )
   }
