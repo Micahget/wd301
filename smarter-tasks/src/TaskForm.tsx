@@ -1,27 +1,41 @@
 /* eslint-disable */
 import React from "react";
-interface Props {}
-interface TaskFormProps {}
-interface TaskFormState {}
+// interface Props {}
+interface TaskFormProps {
+  addTask: (task: { title: string }) => void;
+}
+interface TaskFormState {
+  title: string;
+}
 class TaskForm extends React.Component<TaskFormProps, TaskFormState> {
   constructor(props: TaskFormProps) {
     super(props);
-    
+    this.state = {
+      title: ""
+    }
   }
 
-  inputRef = React.createRef<HTMLInputElement>(); // we use the ref in uncontrolled components. Uncontrolled components are components that don't have a state. We use them when we don't need to keep track of the state of the compononet. But generally we use controlled components. Controlled components are components that have a state. We use them when we need to keep track of the stat. 
+  // inputRef = React.createRef<HTMLInputElement>();
 
+  titleChanged: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+    console.log(`${event.target.value}`);
+    this.setState({ title: event.target.value });
+  };
   addTask: React.FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
-    console.log(`Submitted the form with ${this.inputRef.current?.value}`);
-  };
-  render() {
+    const newTask = {
+      title: this.state.title,
+    };
+    this.props.addTask(newTask);
+    this.setState({ title: "" });
+  }
+  render(){
     return (
       <form onSubmit={this.addTask}>
-        <input type="text" ref={this.inputRef}/>
+        <input type="text" value={this.state.title} onChange={this.titleChanged}/>
         <button type="submit">Add item</button>
       </form>
-    );
+    )
   }
 }
 export default TaskForm;
