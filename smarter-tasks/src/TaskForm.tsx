@@ -43,7 +43,6 @@ class TaskForm extends React.Component<TaskFormProps, TaskFormState> {
     event.preventDefault();
     if (
       this.state.title.trim() === "" ||
-      this.state.todoDescription.trim() === "" ||
       this.state.todoDueDate.toLocaleDateString().trim() === ""
     ) {
       this.setState({ showError: true });
