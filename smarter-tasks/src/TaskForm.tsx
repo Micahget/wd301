@@ -12,6 +12,7 @@ interface TaskFormState {
   title: string;
   todoDescription: string;
   todoDueDate: Date;
+  showError: Boolean;
 }
 class TaskForm extends React.Component<TaskFormProps, TaskFormState> {
   constructor(props: TaskFormProps) {
@@ -20,6 +21,7 @@ class TaskForm extends React.Component<TaskFormProps, TaskFormState> {
       title: "",
       todoDescription: "",
       todoDueDate: new Date(),
+      showError: false,
     };
   }
 
@@ -39,22 +41,28 @@ class TaskForm extends React.Component<TaskFormProps, TaskFormState> {
   };
   addTask: React.FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
-    const newTask = {
-      title: this.state.title,
-      todoDescription: this.state.todoDescription,
-      todoDueDate: this.state.todoDueDate,
-    };
-    this.props.addTask(newTask);
-    this.setState({ title: "", todoDescription: "", todoDueDate: new Date(0) });
+    if (
+      this.state.title.trim() === "" ||
+      this.state.todoDescription.trim() === "" ||
+      this.state.todoDueDate.toLocaleDateString().trim() === ""
+    ) {
+      this.setState({ showError: true });
+    } else {
+      const newTask = {
+        title: this.state.title,
+        todoDescription: this.state.todoDescription,
+        todoDueDate: this.state.todoDueDate,
+      };
+      this.props.addTask(newTask);
+      this.setState({
+        title: "",
+        todoDescription: "",
+        todoDueDate: new Date(),
+      });
+    }
   };
   render() {
     return (
-      // <form onSubmit={this.addTask}>
-      //   <input type="text" value={this.state.title} onChange={this.titleChanged}/>
-      //   <input type="text" value={this.state.todoDescription} onChange={this.titleChanged}/>
-      //   <input type="date" value={this.state.todoDueDate.toISOString().split('T')[0]}  onChange={this.titleChanged}/>
-      //   <button type="submit">Add item</button>
-      // </form>
       <form onSubmit={this.addTask} className="space-y-4">
         <div>
           <label
@@ -68,7 +76,9 @@ class TaskForm extends React.Component<TaskFormProps, TaskFormState> {
             id="todoTitle"
             value={this.state.title}
             onChange={this.titleChanged}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 ${
+              this.state.showError ? "border-red-500" : ""
+            }`}
           />
         </div>
         <div>
@@ -83,7 +93,9 @@ class TaskForm extends React.Component<TaskFormProps, TaskFormState> {
             id="todoDescription"
             value={this.state.todoDescription}
             onChange={this.descriptionChanged}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 ${
+              this.state.showError ? "border-red-500" : ""
+            }`}
           />
         </div>
         <div>
@@ -98,8 +110,12 @@ class TaskForm extends React.Component<TaskFormProps, TaskFormState> {
             id="todoDueDate"
             value={this.state.todoDueDate.toISOString().split("T")[0]}
             onChange={this.dueDateChanged}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 ${
+              this.state.showError ? "border-red-500" : ""
+            }`}
           />
+          {this.state.showError ?
+            <p className="text-red-500 mt-1">Please fill all the forms.</p> : ""}
         </div>
         <button
           id="addTaskButton"
