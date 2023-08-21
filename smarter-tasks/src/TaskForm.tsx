@@ -36,14 +36,23 @@ class TaskForm extends React.Component<TaskFormProps, TaskFormState> {
     this.setState({ todoDescription: event.target.value });
   };
   dueDateChanged: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    console.log(`${event.target.value}`);
-    this.setState({ todoDueDate: new Date(event.target.value) });
+    const newDateValue = event.target.value;
+    if (newDateValue === "") {
+      // handle empty date b/c the page will crash. That is b/c the date is not a valid date.
+      this.setState({ todoDueDate: new Date(), showError: false });
+    } else {
+      this.setState({
+        todoDueDate: new Date(newDateValue),
+        showError: false,
+      });
+    }
   };
   addTask: React.FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
     if (
       this.state.title.trim() === "" ||
-      this.state.todoDueDate.toLocaleDateString().trim() === ""
+      this.state.todoDueDate.toLocaleDateString().trim() === "" ||
+      this.state.todoDescription.trim() === ""
     ) {
       this.setState({ showError: true });
     } else {
@@ -57,6 +66,7 @@ class TaskForm extends React.Component<TaskFormProps, TaskFormState> {
         title: "",
         todoDescription: "",
         todoDueDate: new Date(),
+        showError: false,
       });
     }
   };
@@ -113,8 +123,11 @@ class TaskForm extends React.Component<TaskFormProps, TaskFormState> {
               this.state.showError ? "border-red-500" : ""
             }`}
           />
-          {this.state.showError ?
-            <p className="text-red-500 mt-1">Please fill all the forms.</p> : ""}
+          {this.state.showError ? (
+            <p className="text-red-500 mt-1">Please fill all the forms.</p>
+          ) : (
+            ""
+          )}
         </div>
         <button
           id="addTaskButton"
