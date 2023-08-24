@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { TaskItem } from "./types";
 import TaskForm from "./TaskForm";
 import TaskList from "./TaskList";
@@ -50,6 +50,19 @@ const TaskApp = () => {
   const [taskAppState, setTaskAppState] = React.useState<TaskAppState>({
     tasks: [],
   });
+
+  // useEffect is a React hook that runs after the first render and which is used to perform side effects in function components
+  useEffect(()=> {const id = setTimeout(() => {
+    console.log(`Saved ${taskAppState.tasks.length} items to backend...`);
+  }, 5000);
+  return () => {
+    console.log("clear or cancel any existing network call");
+    clearTimeout(id);
+  };},[taskAppState.tasks])
+
+  // we can also use the useEffect as React.useEffect
+
+
   const addTask = (task: TaskItem) => {
     setTaskAppState({ tasks: [...taskAppState.tasks, task] });
   };
