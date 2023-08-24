@@ -1,7 +1,9 @@
+/* eslint-disable */
 import React, { useEffect } from "react";
 import { TaskItem } from "./types";
 import TaskForm from "./TaskForm";
 import TaskList from "./TaskList";
+import { useLocalStorage } from "./hooks/useLocalStorage";
 
 // interface TaskAppProp {}
 interface TaskAppState {
@@ -47,18 +49,18 @@ interface TaskAppState {
 // }
 
 const TaskApp = () => {
-  const [taskAppState, setTaskAppState] = React.useState<TaskAppState>({
+  const [taskAppState, setTaskAppState] = useLocalStorage<TaskAppState>("tasks",{
     tasks: [],
   });
 
   // useEffect is a React hook that runs after the first render and which is used to perform side effects in function components
-  useEffect(()=> {const id = setTimeout(() => {
-    console.log(`Saved ${taskAppState.tasks.length} items to backend...`);
-  }, 5000);
-  return () => {
-    console.log("clear or cancel any existing network call");
-    clearTimeout(id);
-  };},[taskAppState.tasks])
+  // useEffect(()=> {const id = setTimeout(() => {
+  //   console.log(`Saved ${taskAppState.tasks.length} items to backend...`);
+  // }, 5000);
+  // return () => {
+  //   console.log("clear or cancel any existing network call");
+  //   clearTimeout(id);
+  // };},[taskAppState.tasks])
 
   // we can also use the useEffect as React.useEffect
 
