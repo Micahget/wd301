@@ -39,9 +39,13 @@ const TaskList = (props: Props) => {
         description={task.description}
         dueDate={task.dueDate}
       />
-      <button className="deleteTaskButton border border-white hover:border-red-600 hover:text-red-500 px-2 py-1"
-      onClick={() => removeTask(task)}
-      id="">Remove</button>
+      <button
+        className="deleteTaskButton border border-white hover:border-red-600 hover:text-red-500 px-2 py-1"
+        onClick={() => removeTask(task)}
+        id=""
+      >
+        Remove
+      </button>
     </div>
   ));
 
@@ -51,6 +55,5 @@ const TaskList = (props: Props) => {
 
   return <div>{list}</div>;
 };
-
 
 export default TaskList;
