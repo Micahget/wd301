@@ -1,13 +1,13 @@
-import React from "react";
+// import React from "react";
 import "./TaskCard.css";
 import { TaskItem } from "./types";
 
 /* eslint-disable */
-interface TaskProp {
-  title: string;
-  description: string;
-  dueDate: string;
-}
+// interface TaskProp {
+//   title: string;
+//   description: string;
+//   dueDate: string;
+// }
 // class Task extends React.Component<TaskProp> {
 //   render() {
 //     return (
