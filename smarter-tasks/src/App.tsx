@@ -4,12 +4,23 @@ import "./App.css";
 // import TaskList from './TaskList'
 // import TaskForm from './TaskForm';
 import TaskApp from "./TaskApp";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import TaskListPage from "./pages/TaskListPage";
 
-function App() {
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <HomePage />,
+  },
+  {
+    path: "/tasks",
+    element: <TaskListPage />,
+  }
+]);
+const App = () => {
   return (
-    <div className="App">
-      <TaskApp />
-    </div>
+    <RouterProvider router={router} />
   );
 }
 
