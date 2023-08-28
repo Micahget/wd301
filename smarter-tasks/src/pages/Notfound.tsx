@@ -1,4 +1,4 @@
-const NotFound = () => {
+const Notfound = () => {
     const goBackToHome = () => {
         window.location.href = "/home";
     }
@@ -14,4 +14,4 @@ const NotFound = () => {
   );
 };
 
-export default NotFound;
+export default Notfound;
