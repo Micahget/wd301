@@ -43,7 +43,6 @@ const router = createBrowserRouter([
         },
       ],
     },
-    // for other routes not defined above, redirect to NotFoundPage
     {
       path: "*",
       element: <Navigate to="/notfound" replace />,
