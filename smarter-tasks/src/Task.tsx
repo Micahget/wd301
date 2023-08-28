@@ -1,38 +1,32 @@
-// import React from "react";
 import "./TaskCard.css";
 import { TaskItem } from "./types";
 
-/* eslint-disable */
-// interface TaskProp {
-//   title: string;
-//   description: string;
-//   dueDate: string;
-// }
-// class Task extends React.Component<TaskProp> {
-//   render() {
-//     return (
-//       <div>
-//         <div className="TaskItem shadow-md border border-slate-100">
-//           <h2 className="text-base font-bold my-1">{this.props.title}</h2>
-//           <p className="text-sm text-slate-500">
-//             Due Date:{this.props.dueDate}
-//           </p>
-//           <p className="text-sm text-slate-500">
-//             Description:{this.props.description}
-//           </p>
-//         </div>
-//       </div>
-//     );
-//   }
-// }
-
-const Task = (props: TaskItem) => {
+interface TaskProps {
+  item: TaskItem;
+  removeTask: (task: TaskItem) => void;
+}
+const Task = (props: TaskProps) => {
+  const { item, removeTask } = props;
   return (
-    <li className="TaskItem shadow-md border border-slate-100 list-none">
-      <h2 className="text-base font-bold my-1">{props.title}</h2>
-      <p className="text-sm text-slate-500">{props.dueDate}</p>
-      <p className="text-sm text-slate-500">Description: {props.description}</p>
-    </li>
+    <div className="TaskItem shadow-md border border-slate-100">
+      <div className="sm:ml-4 sm:flex sm:w-full sm:justify-between">
+        <div>
+          <a href={`/tasks/${item.id || ""}`}>
+            <h2 className="text-base font-bold my-1">{item.title}</h2>
+          </a>
+          <p className="text-sm text-slate-500">{item.dueDate}</p>
+          <p className="text-sm text-slate-500">
+            Description: {item.description}
+          </p>
+        </div>
+
+        <button className="deleteTaskButton cursor-pointer flex border-white hover:border-red-500 hover:text-red-500 items-center justify-center w-8 h-8 rounded-full"
+          onClick={() => removeTask(item)}>
+          X
+        </button>
+      </div>
+    </div>
   );
 };
+
 export default Task;
