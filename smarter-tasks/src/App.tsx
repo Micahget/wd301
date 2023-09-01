@@ -41,16 +41,21 @@ const router = createBrowserRouter([
           path: "tasks/:id",
           element: <TaskDetailsPage />,
         },
+        {
+          path: "*",
+          element: <Navigate to="/notfound" replace />,
+        },
+        { 
+          path: "/notfound",
+          element: <Notfound />,
+        },
       ],
     },
     {
-      path: "*",
-      element: <Navigate to="/notfound" replace />,
-    },
-    {
-      path: "/notfound",
-      element: <Notfound />,
-    },
+      path: "tasks",
+      element: <Signin />,
+    }
+   
   ]);
 
 const App = () => {
