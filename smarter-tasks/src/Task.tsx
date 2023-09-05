@@ -7,6 +7,7 @@ interface TaskProps {
 }
 const Task = (props: TaskProps) => {
   const { item, removeTask } = props;
+  console.log(item)
   return (
     <div className="TaskItem shadow-md border border-slate-100">
       <div className="sm:ml-4 sm:flex sm:w-full sm:justify-between">
@@ -19,7 +20,6 @@ const Task = (props: TaskProps) => {
             Description: {item.description}
           </p>
         </div>
-
         <button className="deleteTaskButton cursor-pointer flex border-white hover:border-red-500 hover:text-red-500 items-center justify-center w-8 h-8 rounded-full"
           onClick={() => removeTask(item)}>
           X

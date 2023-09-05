@@ -7,6 +7,7 @@ interface TaskFormProps {
     title: string;
     description: string;
     dueDate: string;
+    id: string;
   }) => void;
   //   // remove the task
   //   title: string;
@@ -18,7 +19,7 @@ interface TaskFormState {
   title: string;
   description: string;
   dueDate: string;
-  showError?: Boolean;
+  id: string;
 }
 // class TaskForm extends React.Component<TaskFormProps, TaskFormState> {
 //   constructor(props: TaskFormProps) {
@@ -159,6 +160,7 @@ const TaskForm = (props: TaskFormProps) => {
     title: "",
     description: "",
     dueDate: "",
+    id: "",
   });
 
   const titleChanged: React.ChangeEventHandler<HTMLInputElement> = (event) => {
@@ -176,16 +178,17 @@ const TaskForm = (props: TaskFormProps) => {
     console.log(`${event.target.value}`);
     setFormState({ ...formState, dueDate: event.target.value });
   };
-  
-
   const addTask: React.FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
     console.log(`Submitted the form with`);
     if (formState.title.length === 0 || formState.dueDate.length === 0) {
       return;
     }
+    formState.id = Math.floor(Math.random() * 1000).toString();
+    
+    console.log(formState);
     props.addTask(formState);
-    setFormState({ title: "", description: "", dueDate: "" });
+    setFormState({ title: "", description: "", dueDate: "" , id: ""});
   };
   return (
     <form onSubmit={addTask}>
