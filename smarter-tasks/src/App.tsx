@@ -8,11 +8,13 @@ import Signup from './pages/signup';
 import Signin from './pages/signin/index';
 // import the css
 import "./App.css";
+import ProtectedRoute from "./ProtectedRoute";
+import Dashboard from "./pages/dashboard";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Signup />,
+    element: <Signin />,
   },
   {
     path: "/signup",
@@ -25,6 +27,18 @@ const router = createBrowserRouter([
   {
     path: "/notfound",
     element: <Notfound />,
+  },
+  {
+    path: "*",
+    element: <Notfound />,
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <ProtectedRoute > 
+      <Dashboard />
+      </ProtectedRoute>
+    )
   },
   {
     path: "*",
