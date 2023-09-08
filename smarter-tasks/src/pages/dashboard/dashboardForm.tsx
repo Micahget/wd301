@@ -24,7 +24,7 @@ function DashboardForm() {
     localStorage.removeItem("authToken");
     localStorage.removeItem("userData");
     console.log("Successfully logged out")
-    window.location.href = "/";
+    window.location.href = "/signin";
   };
 
   return (
@@ -37,15 +37,15 @@ function DashboardForm() {
             <p className="text-lg text-gray-600">Email: {data.email}</p>
         </div>
         )}
-      <div className="">
-        <button
+      {/* <div className=""> */}
+        <a
           onClick={handleSignOut}
           id="logout-link"
           className="bg-red-500 hover:bg-red-600 text-gray-700 font-semibold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline"
         >
           Sign Out
-        </button>
-      </div>
+        </a>
+      {/* </div> */}
     </div>
   );
 }
