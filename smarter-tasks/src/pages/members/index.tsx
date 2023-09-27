@@ -1,13 +1,13 @@
-import ProjectList from "./MemberList";
-import NewProject from "./NewMember";
+import MemberList from "./MemberList";
+import NewMemeber from "./NewMember";
 const Projects = () => {
   return (
     <>
       <div className="flex justify-between">
-        <h2 className="text-2xl font-medium tracking-tight">Projects</h2>
-        <NewProject />
+        <h2 className="text-2xl font-medium tracking-tight">Members</h2>
+        <NewMemeber />
       </div>
-      <ProjectList />
+      <MemberList />
     </>
   )
 }

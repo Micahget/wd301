@@ -6,7 +6,7 @@ import { useUsersDispatch } from "../../context/members/context";
 
 // I'll import the ProjectListItems component from the same folder. 
 // This I'll define next.
-import MemberListItems from "./MemeberListItems";
+import MemberListItems from "./MemberListItems";
 const MemberList: React.FC = () => {
 
   // I'll define a new constant called dispatchProjects, 
