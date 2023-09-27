@@ -1,6 +1,14 @@
-const Members = () => {
-    return (
-      <h2>Members</h2>
-    )
-  }
-  export default Members;
+import ProjectList from "./MemberList";
+import NewProject from "./NewMember";
+const Projects = () => {
+  return (
+    <>
+      <div className="flex justify-between">
+        <h2 className="text-2xl font-medium tracking-tight">Projects</h2>
+        <NewProject />
+      </div>
+      <ProjectList />
+    </>
+  )
+}
+export default Projects;
