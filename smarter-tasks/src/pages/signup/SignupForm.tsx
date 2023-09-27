@@ -31,7 +31,10 @@ const SignupForm: React.FC = () => {
       const data = await response.json();
       localStorage.setItem('authToken', data.token); // localStorage is a browser API
       localStorage.setItem('userData', JSON.stringify(data.user)  ); // localStorage is a browser API
-      navigate('/dashboard')
+      // navigate('/dashboard')
+
+      navigate("/account")
+
     } catch (error) {
       console.error('Sign-up failed:', error);
     }

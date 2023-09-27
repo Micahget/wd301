@@ -1,11 +1,14 @@
+// tailwind.config.js
+/* eslint-disable */
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
   content: [
-     "./index.html",
-  "./src/**/*.{js,ts,jsx,tsx}",],
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
   theme: {
     extend: {},
   },
   plugins: [],
+  darkMode: "class"
 }
-

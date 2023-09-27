@@ -34,7 +34,9 @@ const SigninForm: React.FC = () => {
       localStorage.setItem('authToken', data.token); // localStorage is a browser API
       localStorage.setItem('userData', JSON.stringify(data.user)  ); // localStorage is a browser API
       console.log(data.token)
-      navigate('/dashboard') 
+      // navigate('/dashboard') 
+      navigate("/account")
+
 
     } catch (error) {
       console.error('Sign-in failed:', error);
