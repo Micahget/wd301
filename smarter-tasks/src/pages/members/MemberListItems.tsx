@@ -60,6 +60,7 @@ export default function MemberListItems() {
             Email: {user.email}
           </h5>
           <button
+          id="delete-btn"
             onClick={() => handleDelete(user.id)}
             className="hover:text-red-500 text-gray-700 font-bold py-2 px-4 rounded mt-2"
           >
