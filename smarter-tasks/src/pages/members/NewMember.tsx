@@ -1,12 +1,9 @@
-// src/pages/projects/NewProject.tsx
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 
-// First I'll import the addProject function
 import { addUser } from "../../context/members/actions";
 
-// Then I'll import the useProjectsDispatch hook from projects context
 import { useUsersDispatch } from "../../context/members/context";
 type Inputs = {
   name: string;
@@ -16,11 +13,8 @@ type Inputs = {
 const NewMember = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  // Next, I'll add a new state to handle errors.
   const [error, setError] = useState(null);
 
-  // Then I'll call the useProjectsDispatch function to get the dispatch function
-  // for projects
   const dispatchUsers = useUsersDispatch();
   const {
     register,
@@ -38,17 +32,12 @@ const NewMember = () => {
     const { name, email, password } = data;
     console.log(data);
 
-    // Next, I'll call the addProject function with two arguments:
-    //`dispatchProjects` and an object with `name` attribute.
-    // As it's an async function, we will await for the response.
     const response = await addUser(dispatchUsers, { name, email, password });
     console.log(response);
 
-    // Then depending on response, I'll either close the modal...
     if (response.ok) {
       setIsOpen(false);
     } else {
-      // Or I'll set the error.
       setError(response.error as React.SetStateAction<null>);
     }
   };
@@ -60,7 +49,7 @@ const NewMember = () => {
         id="new-member-btn"
         className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
       >
-        New Project
+        New Member
       </button>
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={closeModal}>
@@ -95,7 +84,6 @@ const NewMember = () => {
                   </Dialog.Title>
                   <div className="mt-2">
                     <form onSubmit={handleSubmit(onSubmit)}>
-                      {/* I'll show the error, if it exists.*/}
                       {error && typeof error === "string" && (
                         <span>{error}</span>
                       )}

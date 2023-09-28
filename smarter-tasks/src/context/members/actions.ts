@@ -11,6 +11,7 @@ export const fetchUsers = async (dispatch: any) => {
       headers: { 'Content-Type': 'application/json', "Authorization": `Bearer ${token}` },
     });
     const data = await response.json();
+    console.log('data', data);
     dispatch({ type: "FETCH_USERS_SUCCESS", payload: data });
   } catch (error) {
     console.log('Error fetching users:', error);
