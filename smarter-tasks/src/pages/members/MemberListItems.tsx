@@ -44,7 +44,7 @@ export default function MemberListItems() {
       {users.map((user: any) => (
         <div
           key={user.id}
-          className="block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+          className="member block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
         >
           {/* <button
             className="absolute top-2 right-2 bg-red-500 hover:bg-red-600 text-white rounded-full p-1"
