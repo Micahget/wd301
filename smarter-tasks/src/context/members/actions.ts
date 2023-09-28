@@ -11,8 +11,8 @@ export const fetchUsers = async (dispatch: any) => {
       headers: { 'Content-Type': 'application/json', "Authorization": `Bearer ${token}` },
     });
     const data = await response.json();
-    console.log('data', data);
     dispatch({ type: "FETCH_USERS_SUCCESS", payload: data });
+    console.log('data', data);
   } catch (error) {
     console.log('Error fetching users:', error);
     dispatch({ type: "FETCH_USERS_FAILURE", payload: 'Unable to load users' });
@@ -25,28 +25,21 @@ export const addUser = async (dispatch: any, args: any) => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', "Authorization": `Bearer ${token}` },
 
-      // Next, I'll pass the `args` here
       body: JSON.stringify(args), 
     });
     if (!response.ok) {
-      throw new Error('Failed to create project');
+      throw new Error('Failed to create memeber');
     }
     const data = await response.json();
     if (data.errors && data.errors.length > 0) {
       return { ok: false, error: data.errors[0].message }
     }
 
-    // And if everything goes well with the API call, we will dispatch an action, 
-    // with `type` set to `ADD_PROJECT_SUCCESS` and in `payload` we will send the 
-    // new project `data`.
-    dispatch({ type: 'ADD_USER_SUCCESS', payload: data });
+    dispatch({ type: 'ADD_USER_SUCCESS', payload: data.user });
 
-    // Next, I'll return a status called "ok", with value `true`
-    // as everything went well.
     return { ok: true }
   } catch (error) {
     console.error('Operation failed:', error);
-  // Dialogue 5: And for error I'll return status called "ok", with value `false`.
     return { ok: false, error }
   }
 };

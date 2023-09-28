@@ -19,7 +19,7 @@ export default function MemberListItems() {
   };
 
   const { users, isLoading, isError, errorMessage } = state;
-  console.log(users);
+  console.log("these are users" , users);
 
   if (users.length === 0 && isLoading) {
     return <span>Loading...</span>;
