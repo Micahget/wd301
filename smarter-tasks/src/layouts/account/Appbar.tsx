@@ -30,7 +30,7 @@ const Appbar = () => {
     setEnabled(!enabled);
     setTheme(newTheme);
   };
-  const { pathname } = useLocation();
+  const { pathname } = useLocation(); // this is the current path of the url
 
   const navigation = [
     { name: "Projects", href: "/account/projects", current: false },
@@ -62,7 +62,7 @@ const Appbar = () => {
                               : "text-slate-500 hover:text-blue-600",
                             "rounded-md px-3 py-2 text-sm font-medium"
                           )}
-                          aria-current={isCurrent ? "page" : undefined}
+                          aria-current={isCurrent ? "page" : undefined} // this is to make the current page active
                         >
                           {item.name}
                         </Link>
