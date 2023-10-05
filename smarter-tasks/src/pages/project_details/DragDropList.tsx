@@ -1,30 +1,18 @@
-/* eslint-disable */
 import React from "react";
 import Column from "./Column";
 import { DragDropContext, OnDragEndResponder } from "react-beautiful-dnd";
 import { useTasksDispatch } from "../../context/task/context";
-import { useParams } from "react-router-dom";
 import { AvailableColumns, ProjectData } from "../../context/task/types";
+import { useParams } from "react-router-dom";
 import { reorderTasks, updateTask } from "../../context/task/actions";
-
 
 const Container = (props: React.PropsWithChildren) => {
   return <div className="flex">{props.children}</div>;
 };
 
-// const startKey = source.droppableId as AvailableColumns;
-// const finishKey = destination.droppableId as AvailableColumns;
-
-
-// const taskDispatch = useTasksDispatch();
-// const { projectID } = useParams();
-
-
-const DragDropList = (props: { data: ProjectData }) => {
-
-
-  
+const DragDropList: React.FC<{ data: ProjectData }> = (props) => {
   const taskDispatch = useTasksDispatch();
+  const { projectID } = useParams();
   const onDragEnd: OnDragEndResponder = (result) => {
     const { destination, source, draggableId } = result;
     if (!destination) {
@@ -90,6 +78,11 @@ const DragDropList = (props: { data: ProjectData }) => {
       },
     };
     reorderTasks(taskDispatch, newState);
+    const updatedTask = props.data.tasks[updatedItems[0]];
+    // Update task state
+    updatedTask.state = finishKey;
+    // Update task state in database
+    updateTask(taskDispatch, projectID ?? "", updatedTask);
   };
   return (
     <DragDropContext onDragEnd={onDragEnd}>

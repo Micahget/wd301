@@ -1,10 +1,9 @@
 /* eslint-disable */
-import React from "react";
 import { useProjectsState } from "../../context/projects/context";
 import { useTasksState } from "../../context/task/context";
 import TaskDetails from "./TaskDetails";
 import { useParams } from "react-router-dom";
-
+import { CommentsProvider } from "../../context/comment/context";
 const TaskDetailsContainer = () => {
   let { taskID } = useParams();
   const projectState = useProjectsState();
@@ -20,7 +19,11 @@ const TaskDetailsContainer = () => {
     return <>No such task!</>;
   }
 
-  return <TaskDetails />;
+  return (
+    <CommentsProvider>
+      <TaskDetails />
+    </CommentsProvider>
+  );
 };
 
 export default TaskDetailsContainer;

@@ -1,21 +1,19 @@
 /* eslint-disable */
-import React, { Fragment, useState, useEffect } from "react";
+import { Dialog, Transition, Listbox } from "@headlessui/react";
+import CheckIcon from "@heroicons/react/24/outline/CheckIcon";
+import { Fragment, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useTasksDispatch, useTasksState } from "../../context/task/context";
 import { updateTask } from "../../context/task/actions";
-
 import { useProjectsState } from "../../context/projects/context";
 import { TaskDetailsPayload } from "../../context/task/types";
-import { Dialog, Transition, Listbox } from "@headlessui/react";
-import CheckIcon from "@heroicons/react/24/outline/CheckIcon";
 import { useUsersState } from "../../context/members/context";
-
+import { Comments } from "../comments/Comments";
 
 type TaskFormUpdatePayload = TaskDetailsPayload & {
   selectedPerson: string;
 };
-
 // Helper function to format the date to YYYY-MM-DD format
 const formatDateForPicker = (isoDate: string) => {
   const dateObj = new Date(isoDate);
@@ -27,9 +25,7 @@ const formatDateForPicker = (isoDate: string) => {
   return `${year}-${month}-${day}`;
 };
 
-
 const TaskDetails = () => {
-  const memberState = useUsersState();
   let [isOpen, setIsOpen] = useState(true);
 
   let { projectID, taskID } = useParams();
@@ -40,19 +36,21 @@ const TaskDetails = () => {
   const taskListState = useTasksState();
   const taskDispatch = useTasksDispatch();
 
+  const memberState = useUsersState();
+
   const selectedProject = projectState?.projects.filter(
     (project) => `${project.id}` === projectID
   )[0];
 
   const selectedTask = taskListState.projectData.tasks[taskID ?? ""];
+  // Use react-form-hook to manage the form. Initialize with data from selectedTask.
   const [selectedPerson, setSelectedPerson] = useState(
     selectedTask.assignedUserName ?? ""
   );
-  // Use react-form-hook to manage the form. Initialize with data from selectedTask.
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    /* formState: { errors }, */
   } = useForm<TaskFormUpdatePayload>({
     defaultValues: {
       title: selectedTask.title,
@@ -73,7 +71,7 @@ const TaskDetails = () => {
 
   const onSubmit: SubmitHandler<TaskFormUpdatePayload> = async (data) => {
     const assignee = memberState?.users?.filter(
-      (member: any) => member.name === selectedPerson
+      (member) => member.name === selectedPerson
     )?.[0];
     updateTask(taskDispatch, projectID ?? "", {
       ...selectedTask,
@@ -189,7 +187,6 @@ const TaskDetails = () => {
                           ))}
                         </Listbox.Options>
                       </Listbox>
-
                       <button
                         type="submit"
                         className="inline-flex justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 mr-2 text-sm font-medium text-white hover:bg-blue-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
@@ -204,6 +201,7 @@ const TaskDetails = () => {
                         Cancel
                       </button>
                     </form>
+                    <Comments />
                   </div>
                 </Dialog.Panel>
               </Transition.Child>
