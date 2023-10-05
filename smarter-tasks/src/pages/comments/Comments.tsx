@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { useCommentsDispatch } from "../../context/comment/context";
 import { addComment, fetchComments } from "../../context/comment/actions";
 import { Comment } from "../../context/comment/types";
-import CommentListItems from "./CommentList";
+import CommentList from "./CommentList";
 
 export const Comments = () => {
   const CommentsDispatch = useCommentsDispatch();
@@ -64,7 +64,7 @@ export const Comments = () => {
           Comment
         </button>
       </form>
-      <CommentListItems />
+      <CommentList />
     </>
   );
 };
