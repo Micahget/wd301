@@ -13,7 +13,7 @@ const Projects = () => {
         <h2 className="text-2xl font-medium tracking-tight">Members</h2>
         <NewMemeber />
       </div>
-      <MemberList />
+      
       <ErrorBoundary>
         <Suspense fallback={<div className="suspense-loading">Comming...</div>}>
           <MemberList />
