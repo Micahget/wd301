@@ -28,3 +28,4 @@ dist-ssr
 secretFile.md
 netlify.toml
 smarter-tasks copy
+dev-dist
