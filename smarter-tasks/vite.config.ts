@@ -3,7 +3,10 @@ import react from "@vitejs/plugin-react";
 import { VitePWA } from "vite-plugin-pwa";
 
 export default ({ mode }) => {
-  return defineConfig({
+  return defineConfig({ 
+       build: {
+           outDir:"dev-dist",
+      },
     plugins: [
       react(),
       VitePWA({
