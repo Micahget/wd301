@@ -1,11 +1,13 @@
 /* eslint-disable */
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { useCommentsDispatch } from "../../context/comment/context";
 import { addComment, fetchComments } from "../../context/comment/actions";
 import { Comment } from "../../context/comment/types";
-import CommentList from "./CommentList";
+import ErrorBoundary from "../../components/ErrorBoundary";
+import React from "react";
+const CommentListItems = React.lazy(() => import("./CommentList"));
 
 export const Comments = () => {
   const CommentsDispatch = useCommentsDispatch();
@@ -64,7 +66,11 @@ export const Comments = () => {
           Comment
         </button>
       </form>
-      <CommentList />
+      <ErrorBoundary>
+        <Suspense fallback={<div className="suspense-loading">Loading...</div>}>
+          <CommentListItems />
+        </Suspense>
+      </ErrorBoundary>
     </>
   );
 };
