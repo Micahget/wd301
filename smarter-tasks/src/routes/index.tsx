@@ -1,5 +1,4 @@
-/* eslint-disable */
-import { Navigate, Outlet, createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import AccountLayout from "../layouts/account";
 import ProtectedRoute from "./ProtectedRoute";
 import Signin from "../pages/signin";
@@ -7,16 +6,16 @@ import Signup from "../pages/signup";
 import Projects from "../pages/projects";
 import Members from "../pages/members";
 import Logout from "../pages/logout";
+import Notfound from "../pages/Notfound";
 import ProjectContainer from "../pages/projects/ProjectContainer";
 import ProjectDetails from "../pages/project_details";
 import NewTask from "../pages/tasks/NewTask";
 import TaskDetailsContainer from "../pages/tasks/TaskDetailsContainer";
 
-
 const router = createBrowserRouter([
   { path: "/", element: <Navigate to="/account/projects" replace /> },
   {
-    path: "/signin",
+    path: "/",
     element: <Signin />,
   },
   {
@@ -31,6 +30,10 @@ const router = createBrowserRouter([
     path: "/logout",
     element: <Logout />,
   },
+  {
+    path: "/notfound",
+    element: <Notfound />,
+  },
   // Protected Routes
   {
     path: "account",
@@ -40,9 +43,8 @@ const router = createBrowserRouter([
       </ProtectedRoute>
     ),
     children: [
-      // this children is the <Outlet /> from AccountLayout. which means
-
       { index: true, element: <Navigate to="/account/projects" replace /> },
+
       {
         path: "projects",
         element: <ProjectContainer />,
@@ -75,9 +77,15 @@ const router = createBrowserRouter([
       },
       {
         path: "members",
-        element: (<Members />),
+        element: <Members />,
       },
     ],
+  },
+
+  // Catch-all route for 404
+  {
+    path: "*",
+    element: <Navigate to="/notfound" />,
   },
 ]);
 
